@@ -10,11 +10,17 @@
         }
 
         function apagar() {
-            alert("Adiós!");
+            confirm("Quieres salir?");
+            if(respuesta){
+              alert("Adiós")
+              loadPage("adios.html")
+            }else{
+              alert("Bien!")
+            }
         }
     </script>
 </head>
-<body onload="saludo()">
+<body>
 <div id="contenedor">
 
    <!--   <div id="cabecera">
