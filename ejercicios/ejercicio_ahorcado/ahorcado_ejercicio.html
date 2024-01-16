@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado</title>
+    <link rel="stylesheet" href="ahorcado.css">
+    <script type="text/javascript" src="ahorcado.js"></script>
+</head>
+
+<body>
+    <div id="titulo">
+        <h2>AHORCADO</h2>
+    </div>
+    <div id="palabraAdivinada">
+        <input id="letras" type="text" id="cajaLetra" readonly>
+        <input id="letras" type="text" id="cajaLetra" readonly>
+        <input id="letras" type="text" id="cajaLetra" readonly>
+        <input id="letras" type="text" id="cajaLetra" readonly>
+        <input id="letras" type="text" id="cajaLetra" readonly>
+    </div>
+    <div id="letraJugada">
+        <label>Letra&nbsp;</label>
+        <input type="text" id="letraJugada" autofocus><br>
+    </div>
+    <div id="botones">
+        <input id="button" type="button" value="Probar" onclick="probar()">
+        <input id="button" type="button" value="Reiniciar" onclick="reiniciarPantalla()">
+    </div>
+    <div id="aciertoFallo">
+        <p></p>
+    </div>
+    <div id="intentos">
+        <p></p>
+    </div>
+
+
+</body>
+
+</html>

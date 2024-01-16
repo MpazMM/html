@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Ahorcado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #word-display {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #incorrect-letters {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #hangman-image {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Juego del Ahorcado</h1>
+
+<div id="word-display"></div>
+<div id="incorrect-letters"></div>
+<img id="hangman-image" src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Hangman-0.png" alt="Ahorcado">
+
+<script>
+    // Palabra para adivinar
+    const palabraSecreta = "javascript";
+    
+    // Inicialización de variables
+    let palabraAdivinada = Array(palabraSecreta.length).fill("_");
+    let letrasIncorrectas = [];
+    let intentosRestantes = 6;
+
+    // Función para actualizar la pantalla
+    function actualizarPantalla() {
+        document.getElementById("word-display").innerText = palabraAdivinada.join(" ");
+        document.getElementById("incorrect-letters").innerText = "Letras incorrectas: " + letrasIncorrectas.join(", ");
+        document.getElementById("hangman-image").src = `https://upload.wikimedia.org/wikipedia/commons/8/8b/Hangman-${6 - intentosRestantes}.png`;
+    }
+
+    // Función para manejar la entrada del usuario
+    function manejarInput(letra) {
+        if (palabraSecreta.includes(letra)) {
+            // La letra está en la palabra
+            for (let i = 0; i < palabraSecreta.length; i++) {
+                if (palabraSecreta[i] === letra) {
+                    palabraAdivinada[i] = letra;
+                }
+            }
+        } else {
+            // La letra no está en la palabra
+            letrasIncorrectas.push(letra);
+            intentosRestantes--;
+        }
+
+        actualizarPantalla();
+
+        // Verificar si el juego ha terminado
+        if (palabraAdivinada.join("") === palabraSecreta) {
+            alert("¡Felicidades! Has adivinado la palabra.");
+        } else if (intentosRestantes === 0) {
+            alert("¡Oh no! Te has quedado sin intentos. La palabra era: " + palabraSecreta);
+        }
+    }
+
+    // Event listener para la entrada del usuario
+    document.addEventListener("keydown", function (event) {
+        // Verificar si la tecla presionada es una letra
+        if (/^[a-zA-Z]$/.test(event.key)) {
+            const letra = event.key.toLowerCase();
+            // Verificar si la letra ya ha sido ingresada
+            if (!palabraAdivinada.includes(letra) && !letrasIncorrectas.includes(letra)) {
+                manejarInput(letra);
+            }
+        }
+    });
+
+    // Mostrar la palabra oculta al inicio
+    actualizarPantalla();
+</script>
+
+</body>
+</html>
